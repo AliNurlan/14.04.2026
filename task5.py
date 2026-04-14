@@ -131,3 +131,9 @@ print(users_avg)
 print(GET("/students/top?minAverage=80"))
 print(GET("/students/top?minAverage=60&sortDesc=average"))
 print(GET("/students/top?minAverage=60&sortDesc=average&page=1"))
+print("--- end of hardcoded tests ---")
+
+request = input("Print GET request (with full URL)\n Type 'q' to exit\n")
+while request != 'q':
+    print(GET(request))
+    request = input("Print GET request (with full URL)\n Type 'q' to exit\n")
