@@ -56,7 +56,7 @@ class Service:
 
 class Controller:
 
-    def minAverage(num: float) -> json:
+    def minAverage(dummy: any, num: float) -> json:
         temp = Service.getNreplace_average(Service.get_users())
         return Service.delByAverage(temp, num)
     
@@ -99,18 +99,6 @@ def GET(path: str):
 
             for key, value in sorted_params:
                 if key in validOperations:
-                    if key == "sortDesc":
-                        config = validOperations[key]
-                    
-                        try:
-                            clean_value = config["type"](value)
-                        except ValueError:
-                            print(f"Ошибка: параметр {key}")
-                            continue
-                        
-                        current_json = config["func"](current_json, clean_value)
-                        continue
-
                     config = validOperations[key]
                     
                     try:
@@ -119,7 +107,7 @@ def GET(path: str):
                         print(f"Ошибка: параметр {key}")
                         continue
                     
-                    current_json = config["func"](clean_value)
+                    current_json = config["func"](current_json, clean_value)
             
             return current_json
             
@@ -142,3 +130,4 @@ print(users_avg)
 
 print(GET("/students/top?minAverage=80"))
 print(GET("/students/top?minAverage=60&sortDesc=average"))
+print(GET("/students/top?minAverage=60&sortDesc=average&page=1"))
